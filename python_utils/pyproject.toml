@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ns3-ai-ntn"
+version = "0.1.0"
+description = "Gymnasium / SB3 / PyG / MARL extensions for ns3-ntn-toolkit (W4)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "GPL-2.0-only"}
+authors = [
+    {name = "Muhammad Uzair", email = "muhammaduzairr69@gmail.com"},
+]
+dependencies = [
+    "gymnasium>=0.29",
+    "numpy>=1.26",
+    "psutil>=5.9",
+]
+
+[project.optional-dependencies]
+sb3 = ["stable-baselines3>=2.3", "torch>=2.1"]
+gnn = ["torch>=2.1", "torch-geometric>=2.5"]
+marl = ["stable-baselines3>=2.3", "torch>=2.1"]
+ns3gym = ["protobuf>=4.25", "zmq>=0.0.0"]
+all = [
+    "stable-baselines3>=2.3",
+    "torch>=2.1",
+    "torch-geometric>=2.5",
+    "protobuf>=4.25",
+]
+test = ["pytest>=8", "stable-baselines3>=2.3", "torch>=2.1"]
+
+[project.urls]
+Homepage = "https://github.com/Muhammaduazir69/ns3-ntn-toolkit"
+
+[tool.setuptools]
+packages = [
+    "ns3_ai_ntn",
+    "ns3_ai_ntn.envs",
+    "ns3_ai_ntn.sb3",
+    "ns3_ai_ntn.gnn",
+    "ns3_ai_ntn.marl",
+]
+py-modules = ["ns3ai_utils"]

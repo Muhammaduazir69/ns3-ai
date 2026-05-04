@@ -111,6 +111,37 @@ pytest tests/ -v
 
 15 tests cover env contract conformance (check_env), reset determinism, action clipping, GAT forward shape, GAT accuracy gate, PPO 1k-step learn, ns3-gym compat smoke.
 
+## Audit results (2026-05-04)
+
+Stress-tested at 50 k PPO steps × 3 seeds and 80-sat GAT × 5 seeds × 1 000
+epochs as part of the W1–W4 integration audit (`AUDIT_W1_W4.md`):
+
+**PPO @ 50 000 steps × 3 seeds (vs random baseline, 50 eval episodes):**
+
+| Seed | PPO mean ± σ | Random mean ± σ | Gap | Threshold (1σ) | σ-multiple |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 137.99 ± 46.86 | 12.45 ± 25.74 | 125.5 | 25.7 | **~5σ** |
+| 7 | 156.76 ± 28.58 | 12.99 ± 20.29 | 143.8 | 20.3 | **~7σ** |
+| 42 | 140.01 ± 41.42 | 15.67 ± 24.53 | 124.3 | 24.5 | **~5σ** |
+
+**GAT @ 80 sats × 1 000 epochs × 5 seeds:**
+
+| seed | accuracy |
+|:---:|---:|
+| 0 | 0.950 |
+| 1 | 0.962 |
+| 2 | 0.938 |
+| 3 | 0.988 |
+| 4 | 0.925 |
+
+Mean **95.2 %** — well above the 70 % gate, even at 1.6× the unit-test scale.
+
+**W1→W4 integration:** GAT trained on 60-sat **real Walker-Star Starlink shell-1
+geometry** (W1 propagator output, not the synthetic demo) reaches **90 %**
+next-hop accuracy. The W1 `state_vectors()` API slots into
+`build_pyg_data()` without coercion — confirming the cross-workstream
+contract.
+
 ## License
 
 GPL-2.0-only. Same as the parent `ns3-ntn-toolkit`.

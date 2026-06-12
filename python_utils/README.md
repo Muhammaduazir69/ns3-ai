@@ -2,7 +2,7 @@
 
 <p align="center"><strong>Stable-Baselines3 + PyTorch Geometric + canonical ns3-gym layer for the <a href="https://github.com/Muhammaduazir69/ns3-ntn-toolkit">ns3-ntn-toolkit</a>.</strong></p>
 
-<p align="center"><em>Part of the v2.0 roadmap (<a href="../../../ROADMAP_EXECUTION.md">Workstream W4</a>).</em></p>
+<p align="center"><em>Part of the v2.0 roadmap (Workstream W4).</em></p>
 
 ---
 
@@ -114,7 +114,7 @@ pytest tests/ -v
 ## Audit results (2026-05-04)
 
 Stress-tested at 50 k PPO steps × 3 seeds and 80-sat GAT × 5 seeds × 1 000
-epochs as part of the W1–W4 integration audit (`AUDIT_W1_W4.md`):
+epochs as part of the W1–W4 integration audit:
 
 **PPO @ 50 000 steps × 3 seeds (vs random baseline, 50 eval episodes):**
 

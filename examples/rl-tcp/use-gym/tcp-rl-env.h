@@ -22,7 +22,7 @@
 #define NS3_TCP_RL_ENV_H
 
 #include "ns3/tcp-socket-base.h"
-#include <ns3/ai-module.h>
+#include <ns3/ns3-ai-ntn-module.h>
 
 #include <vector>
 

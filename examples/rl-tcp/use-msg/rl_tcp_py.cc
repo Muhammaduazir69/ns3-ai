@@ -19,7 +19,7 @@
 
 #include "tcp-rl-env.h"
 
-#include <ns3/ai-module.h>
+#include <ns3/ns3-ai-ntn-module.h>
 
 #include <pybind11/pybind11.h>
 

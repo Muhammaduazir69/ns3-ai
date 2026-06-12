@@ -5,7 +5,7 @@ build_lib_example(
             use-msg/cqi-dl-env.cc
             use-msg/my-rr-sched.cc
         LIBRARIES_TO_LINK
-            ${libai}
+            ${libns3-ai-ntn}
             ${libcore}
             ${libpoint-to-point}
             ${libnetwork}
@@ -20,7 +20,7 @@ build_lib_example(
 ns3ai_add_pybind_module(ns3ai_ltecqi_py use-msg/lte_cqi_py.cc)
 set_target_properties(ns3ai_ltecqi_py PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/use-msg/)
-target_link_libraries(ns3ai_ltecqi_py PRIVATE ${libai})
+target_link_libraries(ns3ai_ltecqi_py PRIVATE ${libns3-ai-ntn})
 
 # Build Python interface along with C++ lib
 add_dependencies(ns3ai_ltecqi_msg ns3ai_ltecqi_py)

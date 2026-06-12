@@ -5,7 +5,7 @@ build_lib_example(
             use-gym/tcp-rl-env.cc
             use-gym/tcp-rl.cc
         LIBRARIES_TO_LINK
-            ${libai}
+            ${libns3-ai-ntn}
             ${libcore}
             ${libpoint-to-point}
             ${libpoint-to-point-layout}
@@ -25,7 +25,7 @@ build_lib_example(
             use-msg/tcp-rl.cc
             use-msg/tcp-rl-env.cc
         LIBRARIES_TO_LINK
-            ${libai}
+            ${libns3-ai-ntn}
             ${libcore}
             ${libpoint-to-point}
             ${libpoint-to-point-layout}
@@ -41,7 +41,7 @@ build_lib_example(
 ns3ai_add_pybind_module(ns3ai_rltcp_msg_py use-msg/rl_tcp_py.cc)
 set_target_properties(ns3ai_rltcp_msg_py PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/use-msg)
-target_link_libraries(ns3ai_rltcp_msg_py PRIVATE ${libai})
+target_link_libraries(ns3ai_rltcp_msg_py PRIVATE ${libns3-ai-ntn})
 
 # Build Python interface along with C++ lib
 add_dependencies(ns3ai_rltcp_msg ns3ai_rltcp_msg_py)

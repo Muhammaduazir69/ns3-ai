@@ -19,7 +19,7 @@
 
 #include "ai-constant-rate-wifi-manager.h"
 
-#include <ns3/ai-module.h>
+#include <ns3/ns3-ai-ntn-module.h>
 
 #include <pybind11/pybind11.h>
 

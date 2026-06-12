@@ -8,7 +8,7 @@ build_lib_example(
             auto-mcs-wifi-manager.cc
             tgax-residential-propagation-loss-model.cc
         LIBRARIES_TO_LINK
-            ${libai}
+            ${libns3-ai-ntn}
             ${libcore}
             ${libwifi}
             ${libinternet}
@@ -28,7 +28,7 @@ ns3ai_add_pybind_module(ns3ai_multibss_py multi_bss_py.cc)
 set_target_properties(ns3ai_multibss_py PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(ns3ai_multibss_py PRIVATE
-        ${libai}
+        ${libns3-ai-ntn}
 )
 
 # Build Python interface along with C++ lib

@@ -23,7 +23,7 @@
 #ifndef TCP_RL_ENV_H_MSG
 #define TCP_RL_ENV_H_MSG
 
-#include "ns3/ai-module.h"
+#include "ns3/ns3-ai-ntn-module.h"
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/tcp-header.h"

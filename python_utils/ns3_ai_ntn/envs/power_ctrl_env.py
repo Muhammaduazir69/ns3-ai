@@ -1,4 +1,8 @@
-"""Uplink open-loop power control over an LEO link — continuous Box action.
+"""SYNTHETIC uplink power-control env over an LEO link (NO ns-3, NO measured KPI).
+
+WARNING: synthetic placeholder. SNR/BLER/throughput are closed-form proxies,
+not measured from an ns-3 radio plane. Do not present its outputs as real
+measurements.
 
 State: path loss (dB), slow-fading state (dB), recent BLER. Action: TX power
 in [-40, +23] dBm (UE class). Reward: throughput proxy minus power cost.
@@ -67,7 +71,10 @@ class PowerCtrlEnv(gym.Env):
         if action.shape != (1,):
             raise ValueError(f"action must be shape (1,), got {action.shape}")
         tx_dbm = float(np.clip(action[0], -40.0, 23.0))
-        rx = tx_dbm - self._pl + self._slow + float(self._rng.normal(0.0, 1.5))
+        # SYNTHETIC link budget (deterministic; no np.random KPI fabrication).
+        # The slow-fade random WALK below evolves the channel STATE, but the
+        # per-step SNR/BLER/throughput are a closed-form function of state.
+        rx = tx_dbm - self._pl + self._slow
         noise = -110.0
         snr = rx - noise
         bler = self._bler_from_snr(snr)

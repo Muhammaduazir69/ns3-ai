@@ -1,10 +1,19 @@
-"""Gymnasium environments wrapping the ns3-ntn-toolkit physical models.
+"""SYNTHETIC placeholder Gymnasium environments (NO ns-3 in the loop).
 
-Each env is a self-contained Python simulator that mimics the dominant
-behavior of its C++ counterpart so RL training can iterate at >10 kHz on a
-laptop without spinning up ns-3 every step. The C++ side stays the source of
-truth for protocol fidelity; these envs reproduce its observable dynamics for
-the purpose of policy search.
+WARNING — these four environments are *synthetic placeholders*. They do NOT
+boot ns-3 and do NOT read any measured KPI. Their RSRP / SINR / BLER /
+throughput come from closed-form proxy formulas, not from a real radio plane.
+There is currently NO ns3-ai C++ env binary for handover / power-control /
+beam-management / slicing to step against (the only real shared-memory targets
+shipped by this module are the upstream demos: ``ns3ai_ltecqi_msg``,
+``ns3ai_rltcp_*``, ``ns3ai_apb_*``, ``ns3ai_ratecontrol_*`` — none expose NTN
+observations). Use these envs ONLY as a fast policy-search sandbox; never
+report their outputs as measured ns-3 results.
+
+To step against a real ns-3 plane, write an ns3-ai env binary that publishes
+the NTN observation through the shared-memory channel and drive it with
+``ns3ai_gym_env.Ns3Env`` (see ``examples/lte-cqi/use-msg/run_online_lstm.py``);
+that is net-new C++ and is out of scope for these Python placeholders.
 
 Available environments::
 

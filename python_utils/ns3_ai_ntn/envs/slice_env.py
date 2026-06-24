@@ -1,13 +1,18 @@
-"""eMBB / URLLC / mMTC slice-resource allocation env (W6 stub).
+"""SYNTHETIC eMBB / URLLC / mMTC slice-resource allocation env (NO ns-3).
+
+WARNING: synthetic placeholder. PRB->throughput and per-slice satisfaction are
+closed-form proxies; the only randomness is the per-slice *demand* (a traffic
+load model, not a measured KPI). It does NOT step the C++ ``ntn-slice`` xApp
+through ns3-ai shared memory. Do not present its outputs as real measurements.
 
 Continuous Box action over the simplex of PRB shares. Observation is the
 current per-slice load (Mbps demand) and aggregate KPI history. Reward is the
 weighted satisfaction across slices — URLLC weights its latency tail much
 heavier than eMBB / mMTC.
 
-This is a stub for full W6 (RL-driven slicing). Once W6 wires the C++
-``ntn-slice`` xApp through ns3-ai shared memory, ``SliceEnv`` will swap its
-synthetic dynamics for the real RIC step but keep the same Gymnasium API.
+To make this real, an ns3-ai C++ env binary would have to publish the
+``ntn-slice`` RIC step's measured per-slice goodput/latency through the
+shared-memory channel; that is net-new C++ and out of scope here.
 """
 
 from __future__ import annotations

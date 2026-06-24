@@ -1,11 +1,16 @@
-"""LEO conditional-handover decision env (wraps ntn-cho semantics).
+"""SYNTHETIC LEO conditional-handover decision env (NO ns-3, NO measured KPI).
+
+WARNING: this is a synthetic placeholder. RSRP/SINR are closed-form proxies,
+not measured from ns-3. It does NOT boot ``contrib/ntn-cho`` and does NOT read
+``RxPacketTraceUe``. Do not present its outputs as measured results.
 
 The agent observes the current serving cell plus ``n_candidates`` neighbour
 cells, each described by RSRP, SINR, total TA, and TA drift. At each step it
 chooses to stay or hand over to one of the candidates. The reward is a
 throughput proxy minus handover cost and ping-pong penalty.
 
-The dynamics intentionally mimic ``contrib/ntn-rrc`` and ``contrib/ntn-cho``:
+The dynamics are a synthetic surrogate for ``contrib/ntn-rrc`` and
+``contrib/ntn-cho`` (NOT the real models):
 
 * Per-cell RSRP follows a TA-coupled curve: deepest at zenith (smallest TA),
   shallowest at the horizon. We model RSRP_dBm = -85 + 10·log10(TA / TA_ref).
@@ -14,8 +19,9 @@ The dynamics intentionally mimic ``contrib/ntn-rrc`` and ``contrib/ntn-cho``:
 * Handover cost: 8 dB equivalent (matches the W2 default ``HoMargin``).
 * Ping-pong: handing back to a recently-left cell within 5 s is double-billed.
 
-The closed-form approach lets SB3 train at ~50 kHz on a laptop while staying
-faithful to ntn-cho's decision surface.
+The closed-form approach lets SB3 train at ~50 kHz on a laptop. It is a
+sandbox for policy search only; it is NOT faithful to ntn-cho's measured
+decision surface and must not be reported as such.
 """
 
 from __future__ import annotations
@@ -94,9 +100,13 @@ class HandoverEnv(gym.Env):
         return float(-85.0 - 20.0 * np.log10(max(ratio, 1.0)))
 
     def _rsrp_to_sinr(self, rsrp_dbm: float) -> float:
-        """Crude inversion: SINR ≈ RSRP - noise_floor + interference noise."""
+        """SYNTHETIC proxy: SINR = RSRP - noise_floor (NOT a measured SINR).
+
+        Deterministic closed form; no np.random KPI fabrication. This is a
+        placeholder dynamic, not a real ns-3 RxPacketTraceUe measurement.
+        """
         noise = -110.0
-        sinr = rsrp_dbm - noise + float(self._rng.normal(0.0, 1.5))
+        sinr = rsrp_dbm - noise
         return float(np.clip(sinr, -10.0, 40.0))
 
     def _build_obs(self) -> np.ndarray:

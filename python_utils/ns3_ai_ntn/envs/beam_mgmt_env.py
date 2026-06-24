@@ -1,4 +1,8 @@
-"""Multi-beam selection env on a Walker shell — discrete action over ``n_beams``.
+"""SYNTHETIC multi-beam selection env (NO ns-3, NO measured KPI).
+
+WARNING: synthetic placeholder. The per-beam SNR is a closed-form antenna +
+fixed-path-loss proxy, not measured from an ns-3 radio plane. Do not present
+its outputs as real measurements.
 
 The cell projects ``n_beams`` fixed beams arranged on a triangular lattice on
 the ground; the UE moves through the footprint. The agent picks the best beam
@@ -87,7 +91,8 @@ class BeamMgmtEnv(gym.Env):
         tx_pwr = 50.0  # dBm EIRP per beam
         rsrp = tx_pwr + gain - path_loss
         noise = -110.0
-        return float(rsrp - noise + self._rng.normal(0.0, 1.0))
+        # SYNTHETIC SNR (deterministic; no np.random KPI fabrication).
+        return float(rsrp - noise)
 
     def reset(self, *, seed: int | None = None, options=None):
         super().reset(seed=seed)

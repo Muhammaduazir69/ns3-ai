@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://youtu.be/JNStiBst68I"><img src="https://img.youtube.com/vi/JNStiBst68I/maxresdefault.jpg" alt="NTN Control Center: end-to-end simulation of non-terrestrial networks in ns-3 (video)" width="560"/></a><br/>
+  <a href="https://youtu.be/JNStiBst68I"><img src="https://img.shields.io/badge/YouTube-Watch%20the%205--minute%20demo-red?logo=youtube" alt="Watch on YouTube"/></a><br/>
+  <sub>The NTN Control Center runs and visualizes the ns3-ai examples on a live 3D globe (5-minute video).</sub>
+</p>
+
 # ns3-ai
 
 ## Introduction

@@ -1,9 +1,16 @@
+<!-- hero-banner -->
+<p align="center"><a href="https://muhammaduazir69.github.io/ns3-ai/"><img src="docs/ns3-ai-banner.jpg" alt="ns3-ai (ns3-ntn-toolkit fork): Gymnasium RL bridge for ns-3.43. The banner shows the toolkit architecture (IEEE OJ-COMS 2026, Fig. 2); click to open the project page." width="100%"/></a></p>
+
 <p align="center">
   <a href="https://youtu.be/JNStiBst68I"><img src="https://img.youtube.com/vi/JNStiBst68I/maxresdefault.jpg" alt="NTN Control Center: end-to-end simulation of non-terrestrial networks in ns-3 (video)" width="560"/></a><br/>
   <a href="https://youtu.be/JNStiBst68I"><img src="https://img.shields.io/badge/YouTube-Watch%20the%205--minute%20demo-red?logo=youtube" alt="Watch on YouTube"/></a><br/>
   <a href="https://6g-ntn.live"><img src="https://img.shields.io/badge/Live-6g--ntn.live-2ea44f?logo=googlechrome&logoColor=white" alt="Open the live NTN Control Center"/></a><br/>
   <sub><b>Try it live:</b> <a href="https://6g-ntn.live">6g-ntn.live</a> runs the toolkit's examples in the browser, with open datasets, a scenario gallery and a research forum.</sub><br/>
   <sub>The NTN Control Center runs and visualizes the ns3-ai examples on a live 3D globe (5-minute video).</sub>
+  <a href="https://muhammaduazir69.github.io/ns3-ai/"><img src="https://img.shields.io/badge/Project%20page-ns3--ai-6a10d5?logo=githubpages&logoColor=white" alt="Project page"/></a>
+  <a href="https://github.com/Muhammaduazir69/ns3-ai/releases/latest"><img src="https://img.shields.io/github/v/release/Muhammaduazir69/ns3-ai?label=release&color=3424d6" alt="Latest release"/></a>
+  <a href="https://www.linkedin.com/in/muhammad-uzair-285331185/"><img src="https://img.shields.io/badge/LinkedIn-Muhammad%20Uzair-0A66C2?logo=linkedin&logoColor=white" alt="LinkedIn"/></a><br/>
+  <sub><b>New on 6g-ntn.live:</b> a live ns-3 console, 115 examples with editable parameters, a 3D globe of real constellations, open datasets (CC BY 4.0) and a validation page with 690 test cases in 41 suites. The NTN work of this fork lives on the <a href="https://github.com/Muhammaduazir69/ns3-ai/tree/fix/ns3-43-compatibility-and-critical-bugs"><code>fix/ns3-43-compatibility-and-critical-bugs</code></a> branch.</sub><br/>
 </p>
 
 # ns3-ai

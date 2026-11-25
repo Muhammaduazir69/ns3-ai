@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ns3-ai: Gymnasium RL bridge for ns-3.43 (ns3-ai fork)</title>
-<meta name="description" content="Fork of ns3-ai for ns-3.43: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling.">
+<title>ns3-ai: Gymnasium RL bridge for ns-3.49 (ns3-ai fork)</title>
+<meta name="description" content="Fork of ns3-ai for ns-3.49: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling.">
 <link rel="canonical" href="https://muhammaduazir69.github.io/ns3-ai/">
-<meta property="og:type" content="website"><meta property="og:title" content="ns3-ai: Gymnasium RL bridge for ns-3.43 (ns3-ai fork)">
-<meta property="og:description" content="Fork of ns3-ai for ns-3.43: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling."><meta property="og:url" content="https://muhammaduazir69.github.io/ns3-ai/">
+<meta property="og:type" content="website"><meta property="og:title" content="ns3-ai: Gymnasium RL bridge for ns-3.49 (ns3-ai fork)">
+<meta property="og:description" content="Fork of ns3-ai for ns-3.49: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling."><meta property="og:url" content="https://muhammaduazir69.github.io/ns3-ai/">
 <meta property="og:image" content="https://muhammaduazir69.github.io/ns3-ai/banner.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,16 +65,16 @@ footer{text-align:center;color:var(--mut);font-size:14px;padding:30px 16px 40px}
 <header class="hero" id="hero"><div class="bgfig" id="bgfig"></div>
 <div class="in"><div>
 <div class="kick">ns3-ntn-toolkit module</div><h1>ns3-ai</h1><p class="sub">ns3-ai-ntn: a Gymnasium 1.0 reinforcement-learning bridge for ns-3</p>
-<p class="lead">Fork of ns3-ai for ns-3.43: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling.</p>
+<p class="lead">Fork of ns3-ai for ns-3.49: Gymnasium 1.0 over versioned shared memory, an AI-RAN inference contract, and NTN reinforcement-learning tooling.</p>
 <div class="btns"><a class="btn pri" href="https://6g-ntn.live/module/ns3-ai-ntn">Run it live at 6g-ntn.live</a><a class="btn" href="https://github.com/Muhammaduazir69/ns3-ai">GitHub</a>
-<a class="btn" href="https://muhammaduazir69.github.io/ns3-ntn-toolkit/modules/ns3-ai-ntn/">Documentation</a><a class="btn" href="https://github.com/Muhammaduazir69/ns3-ai/releases/tag/ntn-v2.7.1">Release ntn-v2.7.1</a><a class="btn" href="https://youtu.be/JNStiBst68I">Watch the demo</a></div>
+<a class="btn" href="https://muhammaduazir69.github.io/ns3-ntn-toolkit/modules/ns3-ai-ntn/">Documentation</a><a class="btn" href="https://github.com/Muhammaduazir69/ns3-ai/releases/tag/v3.0.1">Release v3.0.1</a><a class="btn" href="https://youtu.be/JNStiBst68I">Watch the demo</a></div>
 </div>
 <figure class="figcard" id="figcard" tabindex="0" role="button" aria-label="Zoom the figure"><img src="fig.png" alt="Where ns3-ai sits in the toolkit: the software view of ns3-ntn-toolkit (IEEE Open Journal of the Communications Society, 2026, Fig. 2). Click to zoom."><figcaption>Where ns3-ai sits in the toolkit: the software view of ns3-ntn-toolkit (IEEE Open Journal of the Communications Society, 2026, Fig. 2). Click to zoom.</figcaption></figure>
 </div>
 <svg class="wave" viewBox="0 0 1600 46" preserveAspectRatio="none"><path d="M0 30 C400 6 800 46 1600 14 L1600 46 L0 46 Z" fill="var(--bg)"/></svg>
 </header>
 <main>
-<section id="about" class="reveal"><h2>What ns3-ai does</h2><p>ns3-ai-ntn is a fork of the ns3-ai module that connects ns-3.43 simulations to Python agents through Gymnasium 1.0 over shared memory, with a versioned handshake that rejects schema mismatches. It adds an AI-RAN inference contract over in-process or TCP channels and a Python package of NTN reinforcement-learning environments and trainers.</p></section>
+<section id="about" class="reveal"><h2>What ns3-ai does</h2><p>ns3-ai-ntn is a fork of the ns3-ai module that connects ns-3.49 simulations to Python agents through Gymnasium 1.0 over shared memory, with a versioned handshake that rejects schema mismatches. It adds an AI-RAN inference contract over in-process or TCP channels and a Python package of NTN reinforcement-learning environments and trainers.</p></section>
 <section class="reveal"><h2>What it models</h2><p>The module is the interface between an ns-3 process and a learning agent rather than a network model. OpenGymInterface on the C++ side is stepped through Notify() each step, and the transition is latched inside GetObservation so the reward is computed from state the action has actually reached. The C++ and Python sides share a protobuf schema over a Boost.Interprocess shared-memory segment; the handshake carries a protocol version, a module version and an FNV-1a schema digest, so a mismatch is reported as an error. Ns3AiMsgInterface exchanges fixed-layout structs and vectors through a pybind11 module. The fork targets Python 3.10 to 3.13, NumPy 2 and Gymnasium 1.0, and a CMake helper disables link-time optimization per pybind11 target to fix the ns-3.43 import failure.</p><p>An AI-RAN inference contract (AiranInferenceClient and AiranInferenceServer) exchanges length-prefixed protobuf over in-process FIFO or TCP channels, parses Triton config.pbtxt files, and ships deterministic mock runtimes for a beam index classifier and a CSI-to-precoder model; a native grpc++ transport is not implemented yet. The ns3_ai_ntn Python package provides four NTN environments (HandoverEnv, BeamMgmtEnv, SliceEnv, PowerCtrlEnv), which are synthetic and do not boot ns-3, plus a Stable-Baselines3 PPO trainer, a PyTorch Geometric GAT model and parameter-shared multi-agent wrappers. The environment that runs on a measured radio is OranNtnGymHandover in oran-ntn. Bundled upstream examples cover RL-TCP congestion control, Wi-Fi rate control, LTE CQI prediction and multi-BSS channel access.</p></section>
 <section><h2 class="reveal">Measured numbers</h2><div class="grid"><div class="kn reveal"><b>117,017 vs 6,518 cycles</b><p>CPU cycles per C++ to Python transfer, ns3-gym versus the ns3-ai Gym interface (18x fewer)</p><small>upstream ns3-ai benchmark on the RL-TCP example, 6 seeds, mean over seeds; measured by the upstream authors, not re-measured on this fork</small></div><div class="kn reveal"><b>127,148 vs 7,584 cycles</b><p>CPU cycles per Python to C++ transfer, ns3-gym versus the ns3-ai Gym interface (17x fewer)</p><small>upstream ns3-ai benchmark on the RL-TCP example, 6 seeds; not re-measured on this fork</small></div><div class="kn reveal"><b>733,702 vs 279,648 cycles</b><p>CPU cycles per RL decision, message interface versus pure C++ (libtorch)</p><small>upstream ns3-ai benchmark on the RL-TCP example, 6 seeds; not re-measured on this fork</small></div><div class="kn reveal"><b>15.71 dB</b><p>mean serving SINR over 10 Gym steps of OranNtnGymHandover on the measured radio</p><small>one 12 s run of oran-ntn-gym-handover-example in in-process mode, 3 satellites, 2 UEs</small></div></div>
 <p style="color:var(--mut);font-size:14px">Each number states the run it comes from; the README of the module lists the command that reproduces it.</p></section>
@@ -85,10 +85,10 @@ footer{text-align:center;color:var(--mut);font-size:14px;padding:30px 16px 40px}
 <section class="reveal"><h2>Watch</h2><div class="video" id="video" role="button" aria-label="Play the 5-minute demo on YouTube" tabindex="0"></div>
 <p><a href="https://youtu.be/JNStiBst68I">Watch on YouTube</a>: the NTN Control Center running and visualizing the toolkit examples, in five minutes.</p></section>
 <section id="install" class="reveal"><h2>Install</h2>
-<p>Every module ships in the ready-built container image of the toolkit (version 2.7.1):</p>
+<p>Every module ships in the ready-built container image of the toolkit (version 3.0.1):</p>
 <pre><code>docker pull uzairdocker69/ns3-ntn-toolkit:latest
 docker run --rm -it uzairdocker69/ns3-ntn-toolkit:latest bash</code></pre>
-<p>To build from source, clone <a href="https://github.com/Muhammaduazir69/ns3-ntn-toolkit">ns3-ntn-toolkit</a>, which vendors this module under <code>contrib/</code>, or follow <a href="https://github.com/Muhammaduazir69/ns3-ai#readme">the README of this repository</a> (branch <code>fix/ns3-43-compatibility-and-critical-bugs</code>).</p></section>
+<p>To build from source, clone <a href="https://github.com/Muhammaduazir69/ns3-ntn-toolkit">ns3-ntn-toolkit</a>, which vendors this module under <code>contrib/</code>, or follow <a href="https://github.com/Muhammaduazir69/ns3-ai#readme">the README of this repository</a> (branch <code>ns3-ai-ntn-v4</code>).</p></section>
 <section id="cite" class="reveal"><h2>Cite</h2><p>If you use ns3-ai, please cite the toolkit article (<a href="https://doi.org/10.1109/OJCOMS.2026.3745010">doi:10.1109/OJCOMS.2026.3745010</a>):</p>
 <pre><code>@article{uzair2026ns3ntntoolkit,
   author  = {Uzair, Muhammad and Aldahlan, Bassma G. and Albar, Ali A. and
@@ -102,7 +102,7 @@ docker run --rm -it uzairdocker69/ns3-ntn-toolkit:latest bash</code></pre>
   doi     = {10.1109/OJCOMS.2026.3745010}
 }</code></pre></section>
 <section class="reveal"><h2>Links</h2><div class="links">
-<a href="https://6g-ntn.live">6g-ntn.live</a><a href="https://github.com/Muhammaduazir69/ns3-ai">GitHub: ns3-ai</a><a href="https://github.com/Muhammaduazir69/ns3-ai/releases/tag/ntn-v2.7.1">Latest release (ntn-v2.7.1)</a><a href="https://github.com/Muhammaduazir69/ns3-ntn-toolkit">ns3-ntn-toolkit</a>
+<a href="https://6g-ntn.live">6g-ntn.live</a><a href="https://github.com/Muhammaduazir69/ns3-ai">GitHub: ns3-ai</a><a href="https://github.com/Muhammaduazir69/ns3-ai/releases/tag/v3.0.1">Latest release (v3.0.1)</a><a href="https://github.com/Muhammaduazir69/ns3-ntn-toolkit">ns3-ntn-toolkit</a>
 <a href="https://muhammaduazir69.github.io/ns3-ntn-toolkit/modules/ns3-ai-ntn/">Documentation</a><a href="https://hub.docker.com/r/uzairdocker69/ns3-ntn-toolkit">Docker Hub</a><a href="https://youtu.be/JNStiBst68I">YouTube</a><a href="https://www.linkedin.com/in/muhammad-uzair-285331185/">LinkedIn</a><a href="https://orcid.org/0009-0002-4104-2680">ORCID</a></div></section>
 </main>
 <footer>Muhammad Uzair, Independent Researcher &middot; <a href="https://www.linkedin.com/in/muhammad-uzair-285331185/">LinkedIn</a> &middot; <a href="https://orcid.org/0009-0002-4104-2680">ORCID</a> &middot; <a href="https://6g-ntn.live">6g-ntn.live</a><br>GPL-2.0 code; datasets on 6g-ntn.live under CC BY 4.0.</footer>

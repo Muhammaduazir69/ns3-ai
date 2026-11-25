@@ -5,6 +5,8 @@ build_lib_example(
             constant/ai-constant-rate-wifi-manager.cc
         LIBRARIES_TO_LINK
     ${libntn-observability}
+    ${libntn-constellation}
+    ${libntn-cho}
             ${libns3-ai-ntn}
             ${libcore}
             ${libpoint-to-point}
@@ -24,6 +26,8 @@ build_lib_example(
         thompson-sampling/ai-thompson-sampling-wifi-manager.cc
         LIBRARIES_TO_LINK
     ${libntn-observability}
+    ${libntn-constellation}
+    ${libntn-cho}
         ${libns3-ai-ntn}
         ${libcore}
         ${libpoint-to-point}

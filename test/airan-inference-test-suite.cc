@@ -1213,7 +1213,7 @@ class AiranCodecFidelityTest : public TestCase
 {
   public:
     AiranCodecFidelityTest()
-        : TestCase("Codec fidelity: 16x2x273 CSI bit-exact incl. -0/inf/NaN/denormal, u64 max")
+        : TestCase("Codec fidelity: 16x2x273 CSI bit-exact incl. -0-inf-NaN-denormal, u64 max")
     {
     }
 
@@ -1380,7 +1380,7 @@ class AiranBeamConformanceTest : public TestCase
 {
   public:
     AiranBeamConformanceTest()
-        : TestCase("Beam model: argmax, sorted top-K, tie-break; empty/NaN/mismatched refused")
+        : TestCase("Beam model: argmax, sorted top-K, tie-break; empty-NaN-mismatched refused")
     {
     }
 
@@ -1654,7 +1654,7 @@ class AiranOverloadDrainTest : public TestCase
 {
   public:
     AiranOverloadDrainTest()
-        : TestCase("Overload: 4000-request burst drains at 64/tick, no loss, FIFO, exact tick count")
+        : TestCase("Overload: 4000-request burst drains at 64-tick, no loss, FIFO, exact tick count")
     {
     }
 

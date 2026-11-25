@@ -19,8 +19,12 @@ set_target_properties(ns3ai_apb_py_stru PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/use-msg-stru)
 
 # Build Python binding library along with C++ library
-add_dependencies(ns3ai_apb_msg_vec ns3ai_apb_py_vec)
-add_dependencies(ns3ai_apb_msg_stru ns3ai_apb_py_stru)
+if(TARGET ns3ai_apb_msg_vec)
+  add_dependencies(ns3ai_apb_msg_vec ns3ai_apb_py_vec)
+endif()
+if(TARGET ns3ai_apb_msg_stru)
+  add_dependencies(ns3ai_apb_msg_stru ns3ai_apb_py_stru)
+endif()
 
 build_lib_example(
         NAME ns3ai_apb_gym

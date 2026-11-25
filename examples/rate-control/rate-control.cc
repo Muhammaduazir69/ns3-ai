@@ -18,6 +18,8 @@
  *         Muyuan Shen <muyuan_shen@hust.edu.cn>
  */
 
+#include "../ntn-wifi-site-context.h"
+
 #include "ns3/ntn-dataset-writer.h"
 #include <filesystem>
 #include "ns3/applications-module.h"
@@ -169,6 +171,10 @@ main(int argc, char* argv[])
     cmd.AddValue("csmaDelay", "NanoSeconds", csmaDelay);
     cmd.AddValue("csmaRate", "Mbps", csmaRate);
     cmd.AddValue("standard", "WiFi standard", standard);
+    ntnwifisite::SiteConfig site;
+    cmd.AddValue("siteLat", "Hotspot site latitude [deg] (scene context only)", site.latDeg);
+    cmd.AddValue("siteLon", "Hotspot site longitude [deg] (scene context only)", site.lonDeg);
+    cmd.AddValue("siteAlt", "Hotspot site height above WGS-84 [m] (scene context only)", site.altM);
     cmd.Parse(argc, argv);
     std::cout << "nWifi: " << nWifi << ", RAA Algorithm: " << raaAlgo << ", duration: " << duration
               << std::endl;
@@ -342,6 +348,19 @@ main(int argc, char* argv[])
     Simulator::Schedule(Seconds(2.0 - 1.0), &Throughput);
 
     Simulator::Stop(Seconds(2.0 + duration + 1.0));
+
+    // NTN context: the WLAN is a satellite-backhauled hotspot at a real site (the p2p link
+    // stands for the backhaul). The Wi-Fi nodes keep their local positions, drawn as
+    // east-north-up offsets about the site; a device-less node carries the serving
+    // backhaul satellite, so the Wi-Fi results do not change.
+    const ntnwifisite::SiteContext ctx = ntnwifisite::AddBackhaulSatelliteContext(site);
+    if (ctx.satNode)
+    {
+        std::cout << "Backhaul satellite context: elevation " << ctx.elevationDeg
+                  << " deg, slant range " << ctx.slantRangeKm << " km (" << ctx.propagator
+                  << ")" << std::endl;
+    }
+    ns3::ntnobs::StartSceneFromNodeList(".");
 
     if (tracing)
     {

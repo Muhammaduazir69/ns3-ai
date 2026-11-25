@@ -27,6 +27,12 @@
 
 #define NUM_ENV 10000
 
+// Interface test: this example exercises only the ns3-ai C++/Python bridge
+// (the Gym-style OpenGymEnv interface).
+// It has no network, channel or NTN node on purpose: the C++ side draws two random
+// integers, the Python agent returns their sum, and the C++ side prints both.
+// No physics is modeled, so the dataset record carries only the run metadata.
+
 namespace ns3
 {
 

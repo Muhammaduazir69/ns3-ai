@@ -20,6 +20,8 @@
 
 #include "tgax-residential-propagation-loss-model.h"
 
+#include "../ntn-wifi-site-context.h"
+
 #include "ns3/ntn-dataset-writer.h"
 #include <filesystem>
 #include "ns3/ns3-ai-ntn-module.h"
@@ -1785,11 +1787,9 @@ main(int argc, char* argv[])
     Config::SetDefault("ns3::WifiRemoteStationManager::FragmentationThreshold",
                        StringValue("22000"));
     Config::SetDefault("ns3::WifiRemoteStationManager::RtsCtsThreshold", StringValue("22000"));
-    // Disable short retransmission failure (make retransmissions persistent)
-    Config::SetDefault("ns3::WifiRemoteStationManager::MaxSlrc",
-                       UintegerValue(std::numeric_limits<uint32_t>::max()));
-    Config::SetDefault("ns3::WifiRemoteStationManager::MaxSsrc",
-                       UintegerValue(std::numeric_limits<uint32_t>::max()));
+    // Disable short retransmission failure (make retransmissions persistent). ns-3.49 replaced
+    // the station manager's MaxSlrc/MaxSsrc with WifiMac::FrameRetryLimit (at most 65535).
+    Config::SetDefault("ns3::WifiMac::FrameRetryLimit", UintegerValue(65535));
     // Set maximum queue size to the largest value and set maximum queue delay to be larger than
     // the simulation time
     Config::SetDefault("ns3::WifiMacQueue::MaxSize",
@@ -1838,6 +1838,12 @@ main(int argc, char* argv[])
     cmd.AddValue("boxsize", "Set the size of the box in meters", boxSize);
     cmd.AddValue("drl", "Enable the use of DRL for setting ccaSensitivity", drlCca);
     cmd.AddValue("configFile", "Configuration file of Multi-BSS example", configFileName);
+    ntnwifisite::SiteConfig site;
+    cmd.AddValue("siteLat", "Residential site latitude [deg] (scene context only)", site.latDeg);
+    cmd.AddValue("siteLon", "Residential site longitude [deg] (scene context only)", site.lonDeg);
+    cmd.AddValue("siteAlt",
+                 "Residential site height above WGS-84 [m] (scene context only)",
+                 site.altM);
     cmd.Parse(argc, argv);
 
     RngSeedManager::SetSeed(seedNumber);
@@ -2824,6 +2830,20 @@ main(int argc, char* argv[])
     Simulator::Schedule(Seconds(10), &RestartCalc);
     //    Simulator::Schedule(Seconds(10), &TrackTime);
     Simulator::Stop(Seconds((10) + duration));
+
+    // NTN context: the BSSs are satellite-backhauled residential hotspots at a real site.
+    // The Wi-Fi nodes keep their local positions, drawn as east-north-up offsets about the
+    // site; a device-less node carries the serving backhaul satellite, so the Wi-Fi
+    // results do not change.
+    const ntnwifisite::SiteContext ctx = ntnwifisite::AddBackhaulSatelliteContext(site);
+    if (ctx.satNode)
+    {
+        std::cout << "Backhaul satellite context: elevation " << ctx.elevationDeg
+                  << " deg, slant range " << ctx.slantRangeKm << " km (" << ctx.propagator
+                  << ")" << std::endl;
+    }
+    ns3::ntnobs::StartSceneFromNodeList(".");
+
     Simulator::Run();
 
     std::ostream& os = std::cout;
